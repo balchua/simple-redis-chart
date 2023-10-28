@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "redis-server.fullname" . }}
+  labels: 
+    {{- include "redis-server.labels" . | nindent 4 }}  
+spec:
+  ports:
+    - port: 6379
+      name: redis
+  clusterIP: None
+  selector:
+    {{- include "redis-server.selectorLabels" . | nindent 4 }}
